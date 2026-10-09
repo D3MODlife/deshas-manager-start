@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>deShā’s Manager Headquarters</title>
+<style>
+  :root{
+    --wine:#651f2a; --wine2:#3c1119; --gold:#c8a45d; --cream:#f4eee2;
+    --ink:#261f1c; --paper:#fffaf1; --muted:#776b62;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; color:var(--ink);
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(200,164,93,.18), transparent 30%),
+      linear-gradient(145deg,#efe5d4,#f9f5ec 45%,#e8dcc8);
+    display:flex; align-items:center; justify-content:center; padding:28px;
+  }
+  .wrap{width:min(980px,100%)}
+  .top{
+    background:linear-gradient(135deg,var(--wine2),var(--wine));
+    color:white; border-radius:22px 22px 0 0; padding:28px 34px 24px;
+    box-shadow:0 14px 40px rgba(45,25,20,.18);
+    border-bottom:4px solid var(--gold);
+  }
+  .brand{font-family:Georgia,serif;font-size:46px;line-height:1;margin:0}
+  .brand small{display:block;font-family:Arial,sans-serif;font-size:14px;letter-spacing:3px;
+    text-transform:uppercase;color:#e7d4aa;margin-top:10px}
+  .date{float:right;margin-top:-45px;color:#f3e7cf;font-size:15px}
+  .card{
+    background:rgba(255,250,241,.96); padding:34px; border-radius:0 0 22px 22px;
+    box-shadow:0 14px 40px rgba(45,25,20,.18);
+  }
+  .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;color:var(--wine);font-weight:700}
+  #quote{
+    font-family:Georgia,serif;font-size:31px;line-height:1.25;margin:10px 0 10px;
+    min-height:78px;
+  }
+  .sub{color:var(--muted);margin-bottom:28px}
+  .links{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .links a{
+    text-decoration:none;text-align:center;padding:16px 10px;border:1px solid #d9cdb9;
+    border-radius:13px;background:white;color:var(--wine2);font-weight:700;
+    transition:.15s;
+  }
+  .links a:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 5px 14px #00000014}
+  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:28px;
+    border-top:1px solid #e2d8c8;padding-top:18px;color:var(--muted);font-size:13px}
+  button{
+    border:0;background:var(--wine);color:white;border-radius:999px;padding:10px 15px;
+    cursor:pointer;font-weight:700
+  }
+  button:hover{background:var(--wine2)}
+  @media(max-width:700px){
+    .date{float:none;margin:15px 0 0}.brand{font-size:38px}
+    .links{grid-template-columns:repeat(2,1fr)} #quote{font-size:26px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="top">
+    <h1 class="brand">deShā’s
+      <small>Manager Headquarters</small>
+    </h1>
+    <div class="date" id="date"></div>
+  </section>
+
+  <main class="card">
+    <div class="eyebrow">Today at deShā’s</div>
+    <div id="quote"></div>
+    <div class="sub">Coffee first. Restaurant second. Crisis management as needed.</div>
+
+    <div class="links">
+      <a href="https://www.restaurant365.com/" target="_blank">Restaurant365</a>
+      <a href="https://teams.microsoft.com/" target="_blank">Microsoft Teams</a>
+      <a href="https://outlook.office.com/mail/" target="_blank">Email</a>
+      <a href="https://www.ncrvoyix.com/" target="_blank">NCR / Aloha</a>
+    </div>
+
+    <div class="footer">
+      <span>Harper’s Point • Manager Survival Center</span>
+      <button onclick="newQuote()">Give me another one</button>
+    </div>
+  </main>
+</div>
+
+<script>
+const quotes = [
+  "Nobody has called off yet. Today has potential.",
+  "Today’s goal: make good choices. Or at least document the bad ones.",
+  "Current R365 proficiency: dangerously confident.",
+  "Welcome to another exciting episode of: Who Moved This and Why?",
+  "Today’s forecast: 100% chance someone asks for a manager.",
+  "If you didn’t put it in the manager log, apparently it never happened.",
+  "May your ticket times be short and your side work actually get done.",
+  "Reminder: 'I didn’t know' is not technically a closing procedure.",
+  "Somewhere, right now, a server is looking for a manager.",
+  "The restaurant is fully stocked with ice, optimism, and at least three mysteries.",
+  "Plot twist: the thing you were looking for is exactly where it belongs.",
+  "One team. One dream. Approximately 37 things happening at once.",
+  "Please remain calm. We have managers.",
+  "May all your voids have explanations.",
+  "The schedule is published. May the odds be ever in your favor.",
+  "Today's special: solving problems nobody knew existed.",
+  "If everything is going smoothly, enjoy these seven minutes.",
+  "Manager status: professionally winging it.",
+  "R365 says it's easy. We admire its confidence.",
+  "Before asking Natalie, have you tried clicking it one more time?",
+  "A guest would like to speak to the manager. Congratulations, you're famous.",
+  "We survived yesterday. Statistically encouraging.",
+  "Keep calm and check the walk-in.",
+  "Good morning. Let's find out what broke overnight."
+];
+
+let last=-1;
+function newQuote(){
+  let n;
+  do { n=Math.floor(Math.random()*quotes.length); } while(n===last && quotes.length>1);
+  last=n; document.getElementById("quote").textContent=quotes[n];
+}
+const d=new Date();
+document.getElementById("date").textContent=d.toLocaleDateString("en-US",{
+  weekday:"long",month:"long",day:"numeric",year:"numeric"
+});
+newQuote();
+</script>
+</body>
+</html>
