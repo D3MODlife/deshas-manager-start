@@ -3,129 +3,135 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>deShā’s Manager Headquarters</title>
+<title>A Little Good in the Day</title>
 <style>
-  :root{
-    --wine:#651f2a; --wine2:#3c1119; --gold:#c8a45d; --cream:#f4eee2;
-    --ink:#261f1c; --paper:#fffaf1; --muted:#776b62;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; min-height:100vh; color:var(--ink);
-    font-family:Arial,Helvetica,sans-serif;
-    background:
-      radial-gradient(circle at 15% 10%, rgba(200,164,93,.18), transparent 30%),
-      linear-gradient(145deg,#efe5d4,#f9f5ec 45%,#e8dcc8);
-    display:flex; align-items:center; justify-content:center; padding:28px;
-  }
-  .wrap{width:min(980px,100%)}
-  .top{
-    background:linear-gradient(135deg,var(--wine2),var(--wine));
-    color:white; border-radius:22px 22px 0 0; padding:28px 34px 24px;
-    box-shadow:0 14px 40px rgba(45,25,20,.18);
-    border-bottom:4px solid var(--gold);
-  }
-  .brand{font-family:Georgia,serif;font-size:46px;line-height:1;margin:0}
-  .brand small{display:block;font-family:Arial,sans-serif;font-size:14px;letter-spacing:3px;
-    text-transform:uppercase;color:#e7d4aa;margin-top:10px}
-  .date{float:right;margin-top:-45px;color:#f3e7cf;font-size:15px}
-  .card{
-    background:rgba(255,250,241,.96); padding:34px; border-radius:0 0 22px 22px;
-    box-shadow:0 14px 40px rgba(45,25,20,.18);
-  }
-  .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;color:var(--wine);font-weight:700}
-  #quote{
-    font-family:Georgia,serif;font-size:31px;line-height:1.25;margin:10px 0 10px;
-    min-height:78px;
-  }
-  .sub{color:var(--muted);margin-bottom:28px}
-  .links{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  .links a{
-    text-decoration:none;text-align:center;padding:16px 10px;border:1px solid #d9cdb9;
-    border-radius:13px;background:white;color:var(--wine2);font-weight:700;
-    transition:.15s;
-  }
-  .links a:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 5px 14px #00000014}
-  .footer{display:flex;justify-content:space-between;align-items:center;margin-top:28px;
-    border-top:1px solid #e2d8c8;padding-top:18px;color:var(--muted);font-size:13px}
-  button{
-    border:0;background:var(--wine);color:white;border-radius:999px;padding:10px 15px;
-    cursor:pointer;font-weight:700
-  }
-  button:hover{background:var(--wine2)}
-  @media(max-width:700px){
-    .date{float:none;margin:15px 0 0}.brand{font-size:38px}
-    .links{grid-template-columns:repeat(2,1fr)} #quote{font-size:26px}
-  }
+:root{--ink:#17351f;--glass:rgba(255,250,236,.88);--line:rgba(23,53,31,.14)}
+*{box-sizing:border-box} html,body{margin:0;min-height:100%;font-family:Arial,sans-serif;color:var(--ink)}
+body{min-height:100vh;background:#e9d8b8 url("morning-beach.png") center/cover fixed no-repeat}
+body:after{content:"";position:fixed;inset:0;background:linear-gradient(90deg,rgba(255,250,235,.24),rgba(255,255,255,.02));z-index:-1}
+.wrap{width:min(1180px,94vw);margin:auto;padding:38px 0 44px}
+.hero{max-width:760px;text-shadow:0 1px 10px rgba(255,255,255,.55)}
+h1{font:700 clamp(42px,6vw,78px) Georgia,serif;margin:0 0 8px}
+.quote{font:400 clamp(21px,2.5vw,32px) Georgia,serif;line-height:1.25;margin:0 0 24px}
+.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:18px;align-items:start}
+.card{background:var(--glass);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.7);border-radius:24px;padding:22px;box-shadow:0 14px 45px rgba(0,0,0,.14)}
+.topline{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-weight:700}
+.temp{font:700 64px Georgia,serif;margin:8px 0 0}
+.muted{opacity:.72}.hourly{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;border-top:1px solid var(--line);margin-top:15px;padding-top:15px}
+.hour{text-align:center}.hour .icon{font-size:28px;margin:5px 0}.hour b{display:block}
+h2{font:700 23px Georgia,serif;margin:0 0 12px}.patio p{margin:9px 0;line-height:1.35}
+.smallcards{display:grid;gap:18px}.count{font:700 38px Georgia,serif}.status{font-weight:700}
+
+.error{font-size:14px;margin-top:12px;opacity:.7}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.hourly{grid-template-columns:repeat(3,1fr)}.wrap{padding-top:24px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <section class="top">
-    <h1 class="brand">deShā’s
-      <small>Manager Headquarters</small>
-    </h1>
-    <div class="date" id="date"></div>
-  </section>
+<main class="wrap">
+<section class="hero">
+<h1 id="greeting">Good morning.</h1>
+<p class="quote" id="quote"></p>
+</section>
 
-  <main class="card">
-    <div class="eyebrow">Today at deShā’s</div>
-    <div id="quote"></div>
-    <div class="sub">Coffee first. Restaurant second. Crisis management as needed.</div>
-
-    <div class="links">
-      <a href="https://www.restaurant365.com/" target="_blank">Restaurant365</a>
-      <a href="https://teams.microsoft.com/" target="_blank">Microsoft Teams</a>
-      <a href="https://outlook.office.com/mail/" target="_blank">Email</a>
-      <a href="https://www.ncrvoyix.com/" target="_blank">NCR / Aloha</a>
-    </div>
-
-    <div class="footer">
-      <span>Harper’s Point • Manager Survival Center</span>
-      <button onclick="newQuote()">Give me another one</button>
-    </div>
-  </main>
+<section class="grid">
+<div class="card">
+  <div class="topline"><span>🌤️ West Chester weather</span><span id="stamp"></span></div>
+  <div style="display:flex;gap:20px;align-items:end;flex-wrap:wrap">
+    <div><div class="temp" id="temp">--°</div><div id="condition">Loading weather…</div></div>
+    <div class="muted" id="hilow"></div>
+  </div>
+  <div class="hourly" id="hourly"></div>
+  <div class="error" id="weatherError"></div>
 </div>
 
-<script>
-const quotes = [
-  "Nobody has called off yet. Today has potential.",
-  "Today’s goal: make good choices. Or at least document the bad ones.",
-  "Current R365 proficiency: dangerously confident.",
-  "Welcome to another exciting episode of: Who Moved This and Why?",
-  "Today’s forecast: 100% chance someone asks for a manager.",
-  "If you didn’t put it in the manager log, apparently it never happened.",
-  "May your ticket times be short and your side work actually get done.",
-  "Reminder: 'I didn’t know' is not technically a closing procedure.",
-  "Somewhere, right now, a server is looking for a manager.",
-  "The restaurant is fully stocked with ice, optimism, and at least three mysteries.",
-  "Plot twist: the thing you were looking for is exactly where it belongs.",
-  "One team. One dream. Approximately 37 things happening at once.",
-  "Please remain calm. We have managers.",
-  "May all your voids have explanations.",
-  "The schedule is published. May the odds be ever in your favor.",
-  "Today's special: solving problems nobody knew existed.",
-  "If everything is going smoothly, enjoy these seven minutes.",
-  "Manager status: professionally winging it.",
-  "R365 says it's easy. We admire its confidence.",
-  "Before asking Natalie, have you tried clicking it one more time?",
-  "A guest would like to speak to the manager. Congratulations, you're famous.",
-  "We survived yesterday. Statistically encouraging.",
-  "Keep calm and check the walk-in.",
-  "Good morning. Let's find out what broke overnight."
-];
+<div class="smallcards">
+  <div class="card patio">
+    <h2>Patio outlook</h2>
+    <p id="patioMain">Checking the day…</p>
+    <p id="rainLine">💧 Checking rain chances…</p>
+    <p id="fireLine">🔥 Checking evening temperatures…</p>
+    <p id="sunLine">🌅 Checking sunset…</p>
+  </div>
+  <div class="card">
+    <h2>🦃 Thanksgiving</h2>
+    <div class="count" id="thanksgiving"></div>
+    <div class="muted" id="thanksgivingSub"></div>
+  </div>
+</div>
+</section>
 
-let last=-1;
-function newQuote(){
-  let n;
-  do { n=Math.floor(Math.random()*quotes.length); } while(n===last && quotes.length>1);
-  last=n; document.getElementById("quote").textContent=quotes[n];
+
+</main>
+
+<script>
+const LAT=39.3321, LON=-84.4173; // West Chester, Ohio area
+const quotes=[
+"Everyone you meet today has a story. Give them a good moment in it.",
+"Slow down enough to notice the person in front of you.",
+"Sometimes the kindest thing you can give someone is your full attention.",
+"You may be a small part of someone’s day. Make it a good part.",
+"Before you assume, remember: you are seeing one moment in a much longer story.",
+"A person does not have to tell you they are having a hard day for you to treat them gently.",
+"Give people enough time to feel heard, not just enough time to answer them.",
+"The smallest interactions can stay with people much longer than we realize.",
+"Look up. Make eye contact. See the person.",
+"Give someone an unrushed moment today.",
+"Warmth can be simple: attention, patience, and a genuine welcome.",
+"Everyone is walking a path you cannot fully see. Meet them with kindness."
+];
+const now=new Date();
+document.getElementById("quote").textContent=quotes[Math.floor(now.getTime()/86400000)%quotes.length];
+const h=now.getHours();
+document.getElementById("greeting").textContent=h<12?"Good morning.":h<17?"Good afternoon.":"Good evening.";
+document.getElementById("stamp").textContent=now.toLocaleString([], {weekday:"long",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+
+function thanksgiving(year){
+ let d=new Date(year,10,1), first=d.getDay(), day=1+((4-first+7)%7)+21;
+ return new Date(year,10,day);
 }
-const d=new Date();
-document.getElementById("date").textContent=d.toLocaleDateString("en-US",{
-  weekday:"long",month:"long",day:"numeric",year:"numeric"
-});
-newQuote();
+let tg=thanksgiving(now.getFullYear()); if(now>tg){tg=thanksgiving(now.getFullYear()+1)}
+let days=Math.ceil((tg-now)/(86400000));
+document.getElementById("thanksgiving").textContent=days===0?"Today!":days+" days";
+document.getElementById("thanksgivingSub").textContent=days===0?"Happy Thanksgiving.":`until ${tg.toLocaleDateString([],{month:"long",day:"numeric",year:"numeric"})}`;
+
+const codeMap=c=>({0:["☀️","Clear"],1:["🌤️","Mostly clear"],2:["⛅","Partly cloudy"],3:["☁️","Cloudy"],45:["🌫️","Foggy"],48:["🌫️","Foggy"],51:["🌦️","Light drizzle"],53:["🌦️","Drizzle"],55:["🌧️","Drizzle"],61:["🌦️","Light rain"],63:["🌧️","Rain"],65:["🌧️","Heavy rain"],71:["🌨️","Light snow"],73:["🌨️","Snow"],75:["❄️","Heavy snow"],80:["🌦️","Showers"],81:["🌧️","Showers"],82:["⛈️","Heavy showers"],95:["⛈️","Thunderstorms"],96:["⛈️","Thunderstorms"],99:["⛈️","Thunderstorms"]}[c]||["🌤️","Weather"]);
+
+async function loadWeather(){
+ try{
+ const u=`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&daily=temperature_2m_max,temperature_2m_min,sunset&temperature_unit=fahrenheit&timezone=America%2FNew_York&forecast_days=2`;
+ const r=await fetch(u); if(!r.ok) throw Error("weather unavailable"); const w=await r.json();
+ const [ico,label]=codeMap(w.current.weather_code);
+ document.getElementById("temp").textContent=Math.round(w.current.temperature_2m)+"°";
+ document.getElementById("condition").textContent=`${ico} ${label} • feels like ${Math.round(w.current.apparent_temperature)}°`;
+ document.getElementById("hilow").textContent=`High ${Math.round(w.daily.temperature_2m_max[0])}°  •  Low ${Math.round(w.daily.temperature_2m_min[0])}°`;
+
+ const currentHour=new Date(); currentHour.setMinutes(0,0,0);
+ let idx=w.hourly.time.findIndex(t=>new Date(t)>=currentHour); if(idx<0) idx=0;
+ let picks=[]; for(let i=idx;i<w.hourly.time.length && picks.length<6;i+=2) picks.push(i);
+ document.getElementById("hourly").innerHTML=picks.map((i,n)=>{
+   const t=new Date(w.hourly.time[i]); const [ic]=codeMap(w.hourly.weather_code[i]);
+   return `<div class="hour"><span>${n===0?"Now":t.toLocaleTimeString([],{hour:"numeric"})}</span><div class="icon">${ic}</div><b>${Math.round(w.hourly.temperature_2m[i])}°</b><span class="muted">${w.hourly.precipitation_probability[i]}% rain</span></div>`;
+ }).join("");
+
+ const today=now.toISOString().slice(0,10);
+ let todays=w.hourly.time.map((t,i)=>({t:new Date(t),temp:w.hourly.temperature_2m[i],rain:w.hourly.precipitation_probability[i]}))
+   .filter(x=>w.hourly.time[w.hourly.time.indexOf(x.t)]!=="" ); // harmless placeholder
+ let relevant=[];
+ for(let i=0;i<w.hourly.time.length;i++){let t=new Date(w.hourly.time[i]); if(t>=now && t-now<=12*3600000) relevant.push({t,temp:w.hourly.temperature_2m[i],rain:w.hourly.precipitation_probability[i]});}
+ let maxRain=Math.max(...relevant.map(x=>x.rain),0);
+ let firstRain=relevant.find(x=>x.rain>=40);
+ document.getElementById("patioMain").innerHTML=maxRain<30?"☀️ <b>Patio looks promising.</b>":maxRain<60?"🌦️ <b>Patio may work, but keep an eye on the sky.</b>":"🌧️ <b>Rain could affect the patio today.</b>";
+ document.getElementById("rainLine").textContent=firstRain?`💧 Rain chance reaches ${firstRain.rain}% around ${firstRain.t.toLocaleTimeString([],{hour:"numeric"})}. Keep an eye on the H&B cushions.`:"💧 No strong rain signal in the next 12 hours.";
+ let eve=relevant.filter(x=>x.t.getHours()>=17); let minE=eve.length?Math.min(...eve.map(x=>x.temp)):w.daily.temperature_2m_min[0];
+ document.getElementById("fireLine").textContent=minE<=60?`🔥 Fire pit may feel good later; temperatures reach about ${Math.round(minE)}°.`:`🔥 Fire pit probably won't be needed early; evening stays around ${Math.round(minE)}° or warmer.`;
+ const ss=new Date(w.daily.sunset[0]);
+ document.getElementById("sunLine").textContent=`🌅 Sunset ${ss.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}.`;
+ }catch(e){
+ document.getElementById("condition").textContent="Weather couldn't load right now.";
+ document.getElementById("weatherError").textContent="The rest of the page still works; weather will try again next time the page opens.";
+ }
+}
+loadWeather();
 </script>
 </body>
 </html>
